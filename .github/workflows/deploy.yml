@@ -3,6 +3,7 @@ name: CI/CD Deploy to AWS Fargate
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 env:
   ECR_REPOSITORY:      banking-sdlc
@@ -50,17 +51,17 @@ jobs:
       - name: Deploy to ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition:          ${{ steps.render-bank.outputs.task-definition }}
-          service:                  ${{ secrets.ECS_SERVICE }}
-          cluster:                  ${{ secrets.ECS_CLUSTER }}
+          task-definition:            ${{ steps.render-bank.outputs.task-definition }}
+          service:                    ${{ secrets.ECS_SERVICE }}
+          cluster:                    ${{ secrets.ECS_CLUSTER }}
           wait-for-service-stability: true
 
-  # ── Job 2: Deploy SDLC Dashboard on port 8080 ────────────────────────────
+  # ── Job 2: Deploy SDLC Dashboard on port 8080 ─────────────────────────────
   deploy-sdlc:
     name: Deploy SDLC Dashboard
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout SDLC source (sdlc-dashboard branch)
+      - name: Checkout SDLC source
         uses: actions/checkout@v4
         with:
           ref:  sdlc-dashboard
@@ -89,62 +90,75 @@ jobs:
           docker build -t $IMAGE_URI ./sdlc-source
           docker push $IMAGE_URI
 
-      - name: Bootstrap SDLC infrastructure and deploy
-        id: deploy-sdlc
+      - name: Bootstrap SDLC AWS infrastructure
         env:
-          IMAGE_URI:   ${{ steps.build-sdlc.outputs.IMAGE_URI }}
-          CLUSTER:     ${{ secrets.ECS_CLUSTER }}
-          REGION:      ${{ secrets.AWS_REGION }}
-          ACCOUNT_ID:  ${{ secrets.AWS_ACCOUNT_ID }}
+          IMAGE_URI:  ${{ steps.build-sdlc.outputs.IMAGE_URI }}
+          CLUSTER:    ${{ secrets.ECS_CLUSTER }}
+          REGION:     ${{ secrets.AWS_REGION }}
         run: |
-          set -e
+          set -eo pipefail
+          set -x   # print every command for debugging
 
-          TG_NAME="${{ env.ALB_NAME }}-sdlc-tg"
+          TG_NAME="sdlc-dashboard-tg"
           LOG_GROUP="/ecs/${CLUSTER}-sdlc"
           EXEC_ROLE="${CLUSTER}-task-exec-role"
 
-          echo "==> Fetching VPC / subnets / security group"
-          VPC_ID=$(aws ec2 describe-vpcs \
-            --filters "Name=isDefault,Values=true" \
-            --query "Vpcs[0].VpcId" --output text)
-
-          SUBNET_IDS=$(aws ec2 describe-subnets \
-            --filters "Name=vpc-id,Values=${VPC_ID}" \
-            --query "Subnets[*].SubnetId" --output text | tr '\t' ',')
-
-          SG_ID=$(aws ec2 describe-security-groups \
-            --filters "Name=group-name,Values=${CLUSTER}-alb-sg" \
-                      "Name=vpc-id,Values=${VPC_ID}" \
-            --query "SecurityGroups[0].GroupId" --output text)
-
+          # ── Resolve ALB ────────────────────────────────────────────────────
+          echo "### Resolving ALB: ${{ env.ALB_NAME }}"
           ALB_ARN=$(aws elbv2 describe-load-balancers \
             --names "${{ env.ALB_NAME }}" \
             --query "LoadBalancers[0].LoadBalancerArn" --output text)
-
           ALB_DNS=$(aws elbv2 describe-load-balancers \
             --names "${{ env.ALB_NAME }}" \
             --query "LoadBalancers[0].DNSName" --output text)
+          echo "ALB ARN : ${ALB_ARN}"
+          echo "ALB DNS : ${ALB_DNS}"
 
+          # ── Get ALB security group directly from the ALB (no name guessing) ─
+          SG_ID=$(aws elbv2 describe-load-balancers \
+            --names "${{ env.ALB_NAME }}" \
+            --query "LoadBalancers[0].SecurityGroups[0]" --output text)
+          echo "ALB SG  : ${SG_ID}"
+
+          # ── Networking ─────────────────────────────────────────────────────
+          VPC_ID=$(aws ec2 describe-vpcs \
+            --filters "Name=isDefault,Values=true" \
+            --query "Vpcs[0].VpcId" --output text)
+          SUBNET_IDS=$(aws ec2 describe-subnets \
+            --filters "Name=vpc-id,Values=${VPC_ID}" \
+            --query "Subnets[*].SubnetId" --output text | tr '\t' ',')
+          echo "VPC     : ${VPC_ID}"
+          echo "Subnets : ${SUBNET_IDS}"
+
+          # ── IAM execution role ─────────────────────────────────────────────
           EXEC_ROLE_ARN=$(aws iam get-role \
             --role-name "${EXEC_ROLE}" \
             --query "Role.Arn" --output text)
+          echo "Exec role: ${EXEC_ROLE_ARN}"
 
-          echo "==> Allowing port 8080 on ALB security group"
+          # ── Open port 8080 on the ALB security group ───────────────────────
+          echo "### Opening port 8080 on SG ${SG_ID}"
           aws ec2 authorize-security-group-ingress \
             --group-id "${SG_ID}" \
-            --protocol tcp --port 8080 --cidr 0.0.0.0/0 2>/dev/null \
-            && echo "Added port 8080 rule" || echo "Port 8080 rule already exists"
+            --protocol tcp --port 8080 --cidr 0.0.0.0/0 \
+            && echo "Port 8080 rule added" \
+            || echo "Port 8080 rule already exists (duplicate)"
 
-          echo "==> Ensuring CloudWatch log group"
-          aws logs create-log-group --log-group-name "${LOG_GROUP}" 2>/dev/null \
-            && echo "Created log group" || echo "Log group already exists"
+          # ── CloudWatch log group ───────────────────────────────────────────
+          echo "### Ensuring log group ${LOG_GROUP}"
+          aws logs create-log-group --log-group-name "${LOG_GROUP}" \
+            && echo "Log group created" \
+            || echo "Log group already exists"
 
-          echo "==> Ensuring target group on port 8080"
-          if TG_ARN=$(aws elbv2 describe-target-groups --names "${TG_NAME}" \
-                       --query "TargetGroups[0].TargetGroupArn" --output text 2>/dev/null) \
-             && [ -n "$TG_ARN" ] && [ "$TG_ARN" != "None" ]; then
-            echo "Target group exists: ${TG_ARN}"
-          else
+          # ── Target group ───────────────────────────────────────────────────
+          echo "### Ensuring target group ${TG_NAME}"
+          TG_ARN=$(aws elbv2 describe-target-groups \
+            --names "${TG_NAME}" \
+            --query "TargetGroups[0].TargetGroupArn" \
+            --output text 2>/dev/null || true)
+
+          if [ -z "${TG_ARN}" ] || [ "${TG_ARN}" = "None" ]; then
+            echo "Creating target group..."
             TG_ARN=$(aws elbv2 create-target-group \
               --name "${TG_NAME}" \
               --protocol HTTP --port 80 \
@@ -155,25 +169,31 @@ jobs:
               --healthy-threshold-count 2 \
               --unhealthy-threshold-count 2 \
               --query "TargetGroups[0].TargetGroupArn" --output text)
-            echo "Created target group: ${TG_ARN}"
+            echo "Target group created: ${TG_ARN}"
+          else
+            echo "Target group exists: ${TG_ARN}"
           fi
 
-          echo "==> Ensuring ALB listener on port 8080"
+          # ── ALB listener on port 8080 ──────────────────────────────────────
+          echo "### Ensuring ALB listener on port 8080"
           LISTENER_ARN=$(aws elbv2 describe-listeners \
             --load-balancer-arn "${ALB_ARN}" \
-            --query "Listeners[?Port==\`8080\`].ListenerArn | [0]" --output text 2>/dev/null || echo "")
+            --query "Listeners[?Port==\`8080\`].ListenerArn | [0]" \
+            --output text 2>/dev/null || true)
 
-          if [ -z "$LISTENER_ARN" ] || [ "$LISTENER_ARN" = "None" ]; then
+          if [ -z "${LISTENER_ARN}" ] || [ "${LISTENER_ARN}" = "None" ]; then
+            echo "Creating listener on port 8080..."
             aws elbv2 create-listener \
               --load-balancer-arn "${ALB_ARN}" \
               --protocol HTTP --port 8080 \
               --default-actions "Type=forward,TargetGroupArn=${TG_ARN}"
-            echo "Created listener on port 8080"
+            echo "Listener created"
           else
             echo "Listener on port 8080 already exists: ${LISTENER_ARN}"
           fi
 
-          echo "==> Registering ECS task definition"
+          # ── ECS task definition ────────────────────────────────────────────
+          echo "### Registering ECS task definition"
           TASK_DEF_ARN=$(aws ecs register-task-definition \
             --family "${CLUSTER}-sdlc" \
             --requires-compatibilities FARGATE \
@@ -195,21 +215,25 @@ jobs:
               }
             }]" \
             --query "taskDefinition.taskDefinitionArn" --output text)
-          echo "Registered: ${TASK_DEF_ARN}"
+          echo "Task definition: ${TASK_DEF_ARN}"
 
-          echo "==> Creating or updating ECS service"
-          if aws ecs describe-services --cluster "${CLUSTER}" \
-               --services "${{ env.SERVICE_SDLC }}" \
-               --query "services[?status=='ACTIVE'].serviceName" \
-               --output text 2>/dev/null | grep -q "${{ env.SERVICE_SDLC }}"; then
+          # ── ECS service (create or update) ────────────────────────────────
+          echo "### Creating or updating ECS service ${{ env.SERVICE_SDLC }}"
+          ACTIVE=$(aws ecs describe-services \
+            --cluster "${CLUSTER}" \
+            --services "${{ env.SERVICE_SDLC }}" \
+            --query "services[?status=='ACTIVE'].serviceName" \
+            --output text 2>/dev/null || true)
 
+          if echo "${ACTIVE}" | grep -q "${{ env.SERVICE_SDLC }}"; then
+            echo "Updating existing service..."
             aws ecs update-service \
               --cluster "${CLUSTER}" \
               --service "${{ env.SERVICE_SDLC }}" \
               --task-definition "${TASK_DEF_ARN}" \
               --force-new-deployment
-            echo "Updated existing service"
           else
+            echo "Creating new service..."
             aws ecs create-service \
               --cluster "${CLUSTER}" \
               --service-name "${{ env.SERVICE_SDLC }}" \
@@ -220,14 +244,16 @@ jobs:
                 "awsvpcConfiguration={subnets=[${SUBNET_IDS}],securityGroups=[${SG_ID}],assignPublicIp=ENABLED}" \
               --load-balancers \
                 "targetGroupArn=${TG_ARN},containerName=${{ env.CONTAINER_NAME_SDLC }},containerPort=80"
-            echo "Created new service"
           fi
 
-          echo "==> Waiting for service stability..."
+          # ── Wait for stability ─────────────────────────────────────────────
+          echo "### Waiting for service stability..."
           aws ecs wait services-stable \
             --cluster "${CLUSTER}" \
             --services "${{ env.SERVICE_SDLC }}"
 
           echo ""
-          echo "✅ Demo Bank      → http://${ALB_DNS}"
-          echo "✅ SDLC Dashboard → http://${ALB_DNS}:8080"
+          echo "============================================"
+          echo "  Demo Bank      → http://${ALB_DNS}"
+          echo "  SDLC Dashboard → http://${ALB_DNS}:8080"
+          echo "============================================"
