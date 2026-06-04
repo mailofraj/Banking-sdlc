@@ -99,7 +99,7 @@ jobs:
           set -eo pipefail
           set -x   # print every command for debugging
 
-          TG_NAME="sdlc-dashboard-tg"
+          TG_NAME="${{ secrets.ECS_CLUSTER }}-sdlc-tg"
           LOG_GROUP="/ecs/${CLUSTER}-sdlc"
           EXEC_ROLE="${CLUSTER}-task-exec-role"
 
