@@ -1,0 +1,9 @@
+node_modules
+build
+.git
+.github
+*.mjs
+*.log
+infra
+scripts
+ecs
