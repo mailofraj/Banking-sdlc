@@ -1,98 +1,65 @@
-// src/components/Header.jsx
-import React from "react";
-
-export function Header({ activeView, onViewChange, overallStats, openPRCount }) {
-  const navItems = [
-    { key: "dashboard", label: "Dashboard", icon: "⊞" },
-    { key: "phases",    label: "Phases",    icon: "◫" },
-    { key: "prs",       label: "Pull Requests", icon: "⑂", badge: openPRCount },
-    { key: "timeline",  label: "Timeline",  icon: "▤" },
-  ];
-
+export default function Header({ user, onLogout }) {
   return (
     <header style={{
-      background: "#0F1923",
-      borderBottom: "1px solid #1E2D3D",
+      background: "#1e3a5f",
       padding: "0 28px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      height: 58,
-      position: "sticky",
-      top: 0,
-      zIndex: 100,
+      display: "flex", alignItems: "center", justifyContent: "space-between",
+      height: 60, position: "sticky", top: 0, zIndex: 100,
+      boxShadow: "0 2px 12px rgba(0,0,0,0.15)",
+      fontFamily: "'Segoe UI', system-ui, sans-serif",
     }}>
       {/* Logo */}
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
         <div style={{
-          width: 36, height: 36, borderRadius: 9,
-          background: "linear-gradient(135deg, #1E3A5F 0%, #7C3AED 100%)",
+          width: 36, height: 36, borderRadius: 10,
+          background: "linear-gradient(135deg, #f59e0b, #d97706)",
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: 18, fontWeight: 700, color: "#fff",
+          boxShadow: "0 4px 12px rgba(245,158,11,0.35)",
         }}>
-          ⬡
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 10v11M12 10v11M16 10v11" />
+          </svg>
         </div>
         <div>
-          <div style={{ fontWeight: 800, fontSize: 15, color: "#F1F5F9", letterSpacing: "-0.02em" }}>
-            Banking SDLC
-          </div>
-          <div style={{ fontSize: 10, color: "#64748B", letterSpacing: "0.08em", textTransform: "uppercase" }}>
-            Lifecycle Manager
-          </div>
+          <div style={{ fontWeight: 700, fontSize: 15, color: "white", letterSpacing: "-0.3px" }}>Nova Bank</div>
+          <div style={{ fontSize: 10, color: "rgba(255,255,255,0.45)", letterSpacing: "0.06em", textTransform: "uppercase" }}>Online Banking</div>
         </div>
       </div>
 
-      {/* Nav */}
-      <nav style={{ display: "flex", gap: 2 }}>
-        {navItems.map((item) => (
+      {/* User + logout */}
+      {user && (
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          <div style={{ textAlign: "right" }}>
+            <div style={{ fontSize: 13, fontWeight: 600, color: "white" }}>{user.name}</div>
+            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>{user.email}</div>
+          </div>
+          <div style={{
+            width: 36, height: 36, borderRadius: "50%",
+            background: "linear-gradient(135deg, #f59e0b, #d97706)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: 13, fontWeight: 700, color: "white",
+          }}>
+            {user.avatarInitials}
+          </div>
           <button
-            key={item.key}
-            onClick={() => onViewChange(item.key)}
+            onClick={onLogout}
             style={{
-              display: "flex", alignItems: "center", gap: 7,
-              padding: "6px 14px", borderRadius: 8,
-              border: "none", cursor: "pointer", fontSize: 13, fontWeight: 500,
-              background: activeView === item.key ? "#1E2D3D" : "transparent",
-              color: activeView === item.key ? "#F1F5F9" : "#64748B",
-              transition: "all .15s",
-              position: "relative",
+              display: "flex", alignItems: "center", gap: 6,
+              background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)",
+              color: "rgba(255,255,255,0.8)", fontSize: 13, padding: "7px 14px",
+              borderRadius: 8, cursor: "pointer", fontFamily: "inherit",
+              transition: "background 0.15s",
             }}
+            onMouseEnter={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.15)"}
+            onMouseLeave={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.08)"}
           >
-            <span style={{ fontSize: 16 }}>{item.icon}</span>
-            {item.label}
-            {item.badge > 0 && (
-              <span style={{
-                background: "#DC2626", color: "#fff", borderRadius: 99,
-                fontSize: 10, fontWeight: 700,
-                width: 17, height: 17,
-                display: "inline-flex", alignItems: "center", justifyContent: "center",
-              }}>
-                {item.badge}
-              </span>
-            )}
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Sign out
           </button>
-        ))}
-      </nav>
-
-      {/* Progress indicator */}
-      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ width: 80, height: 4, background: "#1E2D3D", borderRadius: 99, overflow: "hidden" }}>
-            <div style={{ height: "100%", width: `${overallStats.pct}%`, background: "linear-gradient(90deg,#7C3AED,#059669)", borderRadius: 99, transition: "width .5s" }} />
-          </div>
-          <span style={{ fontSize: 12, fontWeight: 700, color: "#94A3B8" }}>
-            {overallStats.pct}%
-          </span>
         </div>
-        <div style={{
-          width: 32, height: 32, borderRadius: 8,
-          background: "#1E2D3D",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: 14, color: "#94A3B8",
-        }}>
-          ⚙
-        </div>
-      </div>
+      )}
     </header>
   );
 }
