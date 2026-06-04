@@ -195,7 +195,7 @@ export default function Login({ onLogin }) {
           }}>
             <p style={{ fontSize: 12, color: "#0369a1", margin: 0, fontWeight: 500 }}>Demo credentials</p>
             <p style={{ fontSize: 12, color: "#0369a1", margin: "4px 0 0" }}>
-              Username: <strong>john.doe</strong> &nbsp;|&nbsp; Password: <strong>password123</strong>
+              Username: <strong>admin</strong> &nbsp;|&nbsp; Password: <strong>admin</strong>
             </p>
           </div>
         </div>

@@ -1,8 +1,8 @@
 export const USERS = [
   {
     id: "u1",
-    username: "john.doe",
-    password: "password123",
+    username: "admin",
+    password: "admin",
     name: "John Doe",
     email: "john.doe@example.com",
     phone: "+1 (555) 012-3456",
