@@ -21,7 +21,7 @@ export default function Header({ user, onLogout }) {
           </svg>
         </div>
         <div>
-          <div style={{ fontWeight: 700, fontSize: 15, color: "white", letterSpacing: "-0.3px" }}>Nova Bank</div>
+          <div style={{ fontWeight: 700, fontSize: 15, color: "white", letterSpacing: "-0.3px" }}>Demo Bank</div>
           <div style={{ fontSize: 10, color: "rgba(255,255,255,0.45)", letterSpacing: "0.06em", textTransform: "uppercase" }}>Online Banking</div>
         </div>
       </div>

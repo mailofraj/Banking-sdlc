@@ -87,7 +87,7 @@ export default function AccountDetail({ account, user, onBack }) {
           <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
         </svg>
         <p style={{ fontSize: 13, color: "#0369a1", margin: 0, lineHeight: 1.5 }}>
-          This is a demo account. No real transactions or funds are involved. For support, contact Nova Bank at 1-800-NOVA-BANK.
+          This is a demo account. No real transactions or funds are involved. For support, contact Demo Bank at 1-800-DEMO-BANK.
         </p>
       </div>
     </div>

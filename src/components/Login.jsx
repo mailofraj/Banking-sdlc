@@ -59,7 +59,7 @@ export default function Login({ onLogin }) {
             </svg>
           </div>
           <h1 style={{ color: "white", fontSize: 28, fontWeight: 700, margin: 0, letterSpacing: "-0.5px" }}>
-            Nova Bank
+            Demo Bank
           </h1>
           <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 14, margin: "6px 0 0" }}>
             Secure Online Banking
@@ -201,7 +201,7 @@ export default function Login({ onLogin }) {
         </div>
 
         <p style={{ textAlign: "center", color: "rgba(255,255,255,0.45)", fontSize: 12, marginTop: 20 }}>
-          © 2026 Nova Bank. All rights reserved.
+          © 2026 Demo Bank. All rights reserved.
         </p>
       </div>
 
