@@ -1,0 +1,355 @@
+build_ids: ['banking-sdlc-build:498b6013-43b3-4e2a-92cb-e9bf132a341e', 'banking-sdlc-build:17657971-d75b-4d6e-ac0c-6992f5002c17', 'banking-sdlc-build:556d0952-b638-4262-9454-d196304747ea']
+build status: FAILED
+log_group: /aws/codebuild/banking-sdlc-build
+log_stream: 498b6013-43b3-4e2a-92cb-e9bf132a341e
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:44.187633 Running on CodeBuild On-demand
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:44.187663 Waiting for agent ping
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:44.390123 Waiting for DOWNLOAD_SOURCE
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:49.616484 Phase is DOWNLOAD_SOURCE
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:49.771536 CODEBUILD_SRC_DIR=/codebuild/output/src3240638177/src
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:49.772344 YAML location is /codebuild/readonly/buildspec.yml
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:49.774887 Setting HTTP client timeout to higher timeout for S3 source
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:49.775035 Processing environment variables
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.014527 No runtime version selected in buildspec.
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.027002 Moving to directory /codebuild/output/src3240638177/src
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.027026 Cache is not defined in the buildspec
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.064749 Skip cache due to: no paths specified to be cached
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.065034 Registering with agent
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.103626 Phases found in YAML: 2
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.103648  PRE_BUILD: 3 commands
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.103653  BUILD: 3 commands
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.104065 Phase complete: DOWNLOAD_SOURCE State: SUCCEEDED
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.104112 Phase context status code:  Message: 
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.206082 Entering phase INSTALL
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.241263 Phase complete: INSTALL State: SUCCEEDED
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.241288 Phase context status code:  Message: 
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.280916 Entering phase PRE_BUILD
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.315731 Running command echo Logging in to Amazon ECR...
+
+2026-06-04T04:23:53.834000+00:00 Logging in to Amazon ECR...
+
+2026-06-04T04:23:53.834000+00:00 
+
+2026-06-04T04:23:53.834000+00:00 [Container] 2026/06/04 04:23:50.320293 Running command aws --version
+
+2026-06-04T04:24:05.898000+00:00 aws-cli/2.34.43 Python/3.14.4 Linux/4.14.355-281.727.amzn2.x86_64 exec-env/AWS_ECS_EC2 exe/x86_64.ubuntu.22
+
+2026-06-04T04:24:05.898000+00:00 
+
+2026-06-04T04:24:05.898000+00:00 [Container] 2026/06/04 04:24:05.375658 Running command aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 807462092031.dkr.ecr.us-east-1.amazonaws.com/banking-sdlc
+
+2026-06-04T04:24:07.932000+00:00 
+
+2026-06-04T04:24:07.932000+00:00 WARNING! Your credentials are stored unencrypted in '/root/.docker/config.json'.
+
+2026-06-04T04:24:07.932000+00:00 Configure a credential helper to remove this warning. See
+
+2026-06-04T04:24:07.932000+00:00 https://docs.docker.com/go/credential-store/
+
+2026-06-04T04:24:07.932000+00:00 
+
+2026-06-04T04:24:07.932000+00:00 Login Succeeded
+
+2026-06-04T04:24:07.932000+00:00 
+
+2026-06-04T04:24:07.932000+00:00 [Container] 2026/06/04 04:24:06.466601 Phase complete: PRE_BUILD State: SUCCEEDED
+
+2026-06-04T04:24:07.932000+00:00 [Container] 2026/06/04 04:24:06.466620 Phase context status code:  Message: 
+
+2026-06-04T04:24:07.932000+00:00 [Container] 2026/06/04 04:24:06.501771 Entering phase BUILD
+
+2026-06-04T04:24:07.932000+00:00 [Container] 2026/06/04 04:24:06.503261 Running command echo Building the Docker image...
+
+2026-06-04T04:24:07.932000+00:00 Building the Docker image...
+
+2026-06-04T04:24:07.932000+00:00 
+
+2026-06-04T04:24:07.932000+00:00 [Container] 2026/06/04 04:24:06.507755 Running command docker build -t 807462092031.dkr.ecr.us-east-1.amazonaws.com/banking-sdlc:latest .
+
+2026-06-04T04:24:07.932000+00:00 #0 building with "default" instance using docker driver
+
+2026-06-04T04:24:07.932000+00:00 
+
+2026-06-04T04:24:07.932000+00:00 #1 [internal] load build definition from Dockerfile
+
+2026-06-04T04:24:07.932000+00:00 #1 transferring dockerfile: 380B done
+
+2026-06-04T04:24:07.932000+00:00 #1 DONE 0.0s
+
+2026-06-04T04:24:07.932000+00:00 
+
+2026-06-04T04:24:07.932000+00:00 #2 [internal] load metadata for public.ecr.aws/docker/library/node:18-alpine
+
+2026-06-04T04:24:07.932000+00:00 #2 DONE 0.3s
+
+2026-06-04T04:24:07.932000+00:00 
+
+2026-06-04T04:24:07.932000+00:00 #3 [internal] load metadata for public.ecr.aws/docker/library/nginx:stable-alpine
+
+2026-06-04T04:24:07.932000+00:00 #3 DONE 0.3s
+
+2026-06-04T04:24:07.932000+00:00 
+
+2026-06-04T04:24:07.932000+00:00 #4 [internal] load .dockerignore
+
+2026-06-04T04:24:07.932000+00:00 #4 transferring context: 2B done
+
+2026-06-04T04:24:07.932000+00:00 #4 DONE 0.0s
+
+2026-06-04T04:24:07.932000+00:00 
+
+2026-06-04T04:24:07.932000+00:00 #5 [build 1/7] FROM public.ecr.aws/docker/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+
+2026-06-04T04:24:07.932000+00:00 #5 resolve public.ecr.aws/docker/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e 0.0s done
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e 7.67kB / 7.67kB done
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:929b04d7c782f04f615cf785488fed452b6569f87c73ff666ad553a7554f0006 1.72kB / 1.72kB done
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:ee77c6cd7c1886ecc802ad6cedef3a8ec1ea27d1fb96162bf03dd3710839b8da 6.18kB / 6.18kB done
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870 1.05MB / 3.64MB 0.1s
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:dd71dde834b5c203d162902e6b8994cb2309ae049a0eabc4efea161b2b5a3d0e 0B / 40.01MB 0.1s
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:1e5a4c89cee5c0826c540ab06d4b6b491c96eda01837f430bd47f0d26702d6e3 1.26MB / 1.26MB 0.1s done
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:25ff2da83641908f65c3a74d80409d6b1b62ccfaab220b9ea70b80df5a2e0549 0B / 446B 0.1s
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870 3.64MB / 3.64MB 0.1s done
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:dd71dde834b5c203d162902e6b8994cb2309ae049a0eabc4efea161b2b5a3d0e 15.73MB / 40.01MB 0.2s
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:25ff2da83641908f65c3a74d80409d6b1b62ccfaab220b9ea70b80df5a2e0549 446B / 446B 0.1s done
+
+2026-06-04T04:24:07.932000+00:00 #5 extracting sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:dd71dde834b5c203d162902e6b8994cb2309ae049a0eabc4efea161b2b5a3d0e 30.41MB / 40.01MB 0.3s
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:dd71dde834b5c203d162902e6b8994cb2309ae049a0eabc4efea161b2b5a3d0e 40.01MB / 40.01MB 0.4s
+
+2026-06-04T04:24:07.932000+00:00 #5 sha256:dd71dde834b5c203d162902e6b8994cb2309ae049a0eabc4efea161b2b5a3d0e 40.01MB / 40.01MB 0.5s done
+
+2026-06-04T04:24:07.932000+00:00 #5 extracting sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870 0.4s done
+
+2026-06-04T04:24:07.932000+00:00 #5 extracting sha256:dd71dde834b5c203d162902e6b8994cb2309ae049a0eabc4efea161b2b5a3d0e
+
+2026-06-04T04:24:11.952000+00:00 #5 ...
+
+2026-06-04T04:24:11.952000+00:00 
+
+2026-06-04T04:24:11.952000+00:00 #6 [stage-1 1/2] FROM public.ecr.aws/docker/library/nginx:stable-alpine@sha256:5f979dcfed4ce6461873f087e8c980d6e29b084b9e8776d9704a7e989b5f4898
+
+2026-06-04T04:24:11.952000+00:00 #6 resolve public.ecr.aws/docker/library/nginx:stable-alpine@sha256:5f979dcfed4ce6461873f087e8c980d6e29b084b9e8776d9704a7e989b5f4898 0.0s done
+
+2026-06-04T04:24:11.952000+00:00 #6 sha256:83902b81d5d0ebfa863977a4ae2260c18bee6817fae0e534c57cab0c1d584a64 2.49kB / 2.49kB done
+
+2026-06-04T04:24:11.952000+00:00 #6 sha256:5d7afdc84df3e03abaf067384e862a08cb7204bd6ad202e91bb59a2fb8a21e5e 12.39kB / 12.39kB done
+
+2026-06-04T04:24:11.952000+00:00 #6 sha256:5f979dcfed4ce6461873f087e8c980d6e29b084b9e8776d9704a7e989b5f4898 10.32kB / 10.32kB done
+
+2026-06-04T04:24:11.952000+00:00 #6 sha256:6a0ac1617861a677b045b7ff88545213ec31c0ff08763195a70a4a5adda577bb 3.86MB / 3.86MB 0.3s done
+
+2026-06-04T04:24:11.952000+00:00 #6 sha256:d591de949fc47baa1d06c6e76fd2e31bb74036616af82eb8f8f1587b3ea79c2f 1.87MB / 1.87MB 0.3s done
+
+2026-06-04T04:24:11.952000+00:00 #6 sha256:43e17fbea4a6e1edc792689241b257ca92f5cc662ffeac9cf227e71357df7ba3 628B / 628B 0.3s done
+
+2026-06-04T04:24:11.952000+00:00 #6 extracting sha256:6a0ac1617861a677b045b7ff88545213ec31c0ff08763195a70a4a5adda577bb 0.4s done
+
+2026-06-04T04:24:11.952000+00:00 #6 sha256:390b5c71f63d4bdbecf7e4cb43b0241dde98e03b04af058eb54c4e155987d855 954B / 954B 0.4s done
+
+2026-06-04T04:24:11.952000+00:00 #6 sha256:4db114418873157bc8c284b9f6da6dea4c1bc08c80fb4c490f45a12ede8c2ede 404B / 404B 0.5s done
+
+2026-06-04T04:24:11.952000+00:00 #6 sha256:36afaf6978329f60deb48adb5d35635fd89334204776fe93c2f548a178ba6472 1.21kB / 1.21kB 0.5s done
+
+2026-06-04T04:24:11.952000+00:00 #6 sha256:9b1872bceaab57004b3b89c6ee3755c3386063852cfc9c5ff68245417047cdd2 1.40kB / 1.40kB 0.6s done
+
+2026-06-04T04:24:11.952000+00:00 #6 sha256:b009abd4e3ad8c26f28dac7b863c357bd87148a3eb023e8cdf08403e457ed87b 20.28MB / 20.28MB 0.8s done
+
+2026-06-04T04:24:11.952000+00:00 #6 extracting sha256:d591de949fc47baa1d06c6e76fd2e31bb74036616af82eb8f8f1587b3ea79c2f 0.2s done
+
+2026-06-04T04:24:11.952000+00:00 #6 extracting sha256:43e17fbea4a6e1edc792689241b257ca92f5cc662ffeac9cf227e71357df7ba3 done
+
+2026-06-04T04:24:11.952000+00:00 #6 extracting sha256:390b5c71f63d4bdbecf7e4cb43b0241dde98e03b04af058eb54c4e155987d855 done
+
+2026-06-04T04:24:11.952000+00:00 #6 extracting sha256:4db114418873157bc8c284b9f6da6dea4c1bc08c80fb4c490f45a12ede8c2ede done
+
+2026-06-04T04:24:11.952000+00:00 #6 extracting sha256:36afaf6978329f60deb48adb5d35635fd89334204776fe93c2f548a178ba6472 done
+
+2026-06-04T04:24:11.952000+00:00 #6 extracting sha256:9b1872bceaab57004b3b89c6ee3755c3386063852cfc9c5ff68245417047cdd2 done
+
+2026-06-04T04:24:11.952000+00:00 #6 extracting sha256:b009abd4e3ad8c26f28dac7b863c357bd87148a3eb023e8cdf08403e457ed87b 2.0s done
+
+2026-06-04T04:24:11.952000+00:00 #6 DONE 3.9s
+
+2026-06-04T04:24:11.952000+00:00 
+
+2026-06-04T04:24:11.952000+00:00 #7 [internal] load build context
+
+2026-06-04T04:24:13.967000+00:00 #7 transferring context: 113.02MB 5.1s
+
+2026-06-04T04:24:13.967000+00:00 #7 ...
+
+2026-06-04T04:24:13.967000+00:00 
+
+2026-06-04T04:24:13.967000+00:00 #5 [build 1/7] FROM public.ecr.aws/docker/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+
+2026-06-04T04:24:13.967000+00:00 #5 extracting sha256:dd71dde834b5c203d162902e6b8994cb2309ae049a0eabc4efea161b2b5a3d0e 4.1s done
+
+2026-06-04T04:24:13.967000+00:00 #5 extracting sha256:1e5a4c89cee5c0826c540ab06d4b6b491c96eda01837f430bd47f0d26702d6e3 0.2s done
+
+2026-06-04T04:24:13.967000+00:00 #5 extracting sha256:25ff2da83641908f65c3a74d80409d6b1b62ccfaab220b9ea70b80df5a2e0549 done
+
+2026-06-04T04:24:13.967000+00:00 #5 DONE 5.5s
+
+2026-06-04T04:24:13.967000+00:00 
+
+2026-06-04T04:24:13.967000+00:00 #7 [internal] load build context
+
+2026-06-04T04:24:13.967000+00:00 #7 ...
+
+2026-06-04T04:24:13.967000+00:00 
+
+2026-06-04T04:24:13.967000+00:00 #8 [build 2/7] WORKDIR /app
+
+2026-06-04T04:24:13.967000+00:00 #8 DONE 0.8s
+
+2026-06-04T04:24:13.967000+00:00 
+
+2026-06-04T04:24:13.967000+00:00 #7 [internal] load build context
+
+2026-06-04T04:24:17.989000+00:00 #7 transferring context: 295.08MB 9.4s done
+
+2026-06-04T04:24:17.989000+00:00 #7 DONE 9.5s
+
+2026-06-04T04:24:17.989000+00:00 
+
+2026-06-04T04:24:17.989000+00:00 #9 [build 3/7] COPY package*.json ./
+
+2026-06-04T04:24:17.989000+00:00 #9 DONE 0.8s
+
+2026-06-04T04:24:17.989000+00:00 
+
+2026-06-04T04:24:17.989000+00:00 #10 [build 4/7] RUN npm ci --silent
+
+2026-06-04T04:24:44.037000+00:00 #10 DONE 25.9s
+
+2026-06-04T04:24:44.037000+00:00 
+
+2026-06-04T04:24:44.037000+00:00 #11 [build 5/7] RUN chmod -R +x ./node_modules/.bin
+
+2026-06-04T04:24:44.037000+00:00 #11 DONE 0.3s
+
+2026-06-04T04:24:44.037000+00:00 
+
+2026-06-04T04:24:44.037000+00:00 #12 [build 6/7] COPY . .
+
+2026-06-04T04:24:55.423000+00:00 #12 DONE 10.7s
+
+2026-06-04T04:24:55.423000+00:00 
+
+2026-06-04T04:24:55.423000+00:00 #13 [build 7/7] RUN npm run build
+
+2026-06-04T04:24:55.423000+00:00 #13 0.377 
+
+2026-06-04T04:24:55.423000+00:00 #13 0.377 > banking-sdlc@1.0.0 build
+
+2026-06-04T04:24:55.423000+00:00 #13 0.377 > react-scripts build
+
+2026-06-04T04:24:55.423000+00:00 #13 0.377 
+
+2026-06-04T04:24:55.423000+00:00 #13 0.380 sh: react-scripts: Permission denied
+
+2026-06-04T04:24:55.423000+00:00 #13 ERROR: process "/bin/sh -c npm run build" did not complete successfully: exit code: 126
+
+2026-06-04T04:24:55.423000+00:00 ------
+
+2026-06-04T04:24:55.423000+00:00  > [build 7/7] RUN npm run build:
+
+2026-06-04T04:24:55.423000+00:00 0.377 
+
+2026-06-04T04:24:55.423000+00:00 0.377 > banking-sdlc@1.0.0 build
+
+2026-06-04T04:24:55.423000+00:00 0.377 > react-scripts build
+
+2026-06-04T04:24:55.423000+00:00 0.377 
+
+2026-06-04T04:24:55.423000+00:00 0.380 sh: react-scripts: Permission denied
+
+2026-06-04T04:24:55.423000+00:00 ------
+
+2026-06-04T04:24:55.423000+00:00 Dockerfile:7
+
+2026-06-04T04:24:55.423000+00:00 --------------------
+
+2026-06-04T04:24:55.423000+00:00    5 |     RUN chmod -R +x ./node_modules/.bin
+
+2026-06-04T04:24:55.423000+00:00    6 |     COPY . .
+
+2026-06-04T04:24:55.423000+00:00    7 | >>> RUN npm run build
+
+2026-06-04T04:24:55.423000+00:00    8 |     
+
+2026-06-04T04:24:55.423000+00:00    9 |     FROM public.ecr.aws/docker/library/nginx:stable-alpine
+
+2026-06-04T04:24:55.423000+00:00 --------------------
+
+2026-06-04T04:24:55.423000+00:00 ERROR: failed to build: failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 126
+
+2026-06-04T04:24:55.423000+00:00 
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:54.895334 Command did not exit successfully docker build -t 807462092031.dkr.ecr.us-east-1.amazonaws.com/banking-sdlc:latest . exit status 1
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:54.903613 Phase complete: BUILD State: FAILED
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:54.903630 Phase context status code: COMMAND_EXECUTION_ERROR Message: Error while executing command: docker build -t 807462092031.dkr.ecr.us-east-1.amazonaws.com/banking-sdlc:latest .. Reason: exit status 1
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:54.946931 Entering phase POST_BUILD
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:54.949606 Phase complete: POST_BUILD State: SUCCEEDED
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:54.949620 Phase context status code:  Message: 
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:55.001879 Set report auto-discover timeout to 5 seconds
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:55.001979 Expanding base directory path:  .
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:55.003532 Assembling file list
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:55.003545 Expanding .
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:55.005200 Expanding file paths for base directory .
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:55.005210 Assembling file list
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:55.005214 Expanding **/*
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:55.241319 Found 5 file(s)
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:55.241371 Report auto-discover file discovery took 0.239492 seconds
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:55.242308 Phase complete: UPLOAD_ARTIFACTS State: SUCCEEDED
+
+2026-06-04T04:24:55.423000+00:00 [Container] 2026/06/04 04:24:55.242326 Phase context status code:  Message: 

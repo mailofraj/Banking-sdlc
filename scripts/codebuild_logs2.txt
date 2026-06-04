@@ -1,0 +1,177 @@
+build_ids: ['banking-sdlc-build:17657971-d75b-4d6e-ac0c-6992f5002c17', 'banking-sdlc-build:556d0952-b638-4262-9454-d196304747ea']
+build status: FAILED
+log_group: /aws/codebuild/banking-sdlc-build
+log_stream: 17657971-d75b-4d6e-ac0c-6992f5002c17
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:51.691953 Running on CodeBuild On-demand
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:51.691982 Waiting for agent ping
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:51.893697 Waiting for DOWNLOAD_SOURCE
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.108253 Phase is DOWNLOAD_SOURCE
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.256062 CODEBUILD_SRC_DIR=/codebuild/output/src3949737940/src
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.257011 YAML location is /codebuild/readonly/buildspec.yml
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.259450 Setting HTTP client timeout to higher timeout for S3 source
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.259573 Processing environment variables
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.455446 No runtime version selected in buildspec.
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.471913 Moving to directory /codebuild/output/src3949737940/src
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.471937 Cache is not defined in the buildspec
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.512260 Skip cache due to: no paths specified to be cached
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.512495 Registering with agent
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.549775 Phases found in YAML: 2
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.549794  PRE_BUILD: 3 commands
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.549798  BUILD: 3 commands
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.550030 Phase complete: DOWNLOAD_SOURCE State: SUCCEEDED
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.550046 Phase context status code:  Message: 
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.672506 Entering phase INSTALL
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.716368 Phase complete: INSTALL State: SUCCEEDED
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.716392 Phase context status code:  Message: 
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.756404 Entering phase PRE_BUILD
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.796037 Running command echo Logging in to Amazon ECR...
+
+2026-06-04T04:22:01.302000+00:00 Logging in to Amazon ECR...
+
+2026-06-04T04:22:01.302000+00:00 
+
+2026-06-04T04:22:01.302000+00:00 [Container] 2026/06/04 04:21:57.801255 Running command aws --version
+
+2026-06-04T04:22:09.349000+00:00 aws-cli/2.34.43 Python/3.14.4 Linux/4.14.355-281.727.amzn2.x86_64 exec-env/AWS_ECS_EC2 exe/x86_64.ubuntu.22
+
+2026-06-04T04:22:09.349000+00:00 
+
+2026-06-04T04:22:09.349000+00:00 [Container] 2026/06/04 04:22:08.550025 Running command aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 807462092031.dkr.ecr.us-east-1.amazonaws.com/banking-sdlc
+
+2026-06-04T04:22:10.786000+00:00 
+
+2026-06-04T04:22:10.786000+00:00 WARNING! Your credentials are stored unencrypted in '/root/.docker/config.json'.
+
+2026-06-04T04:22:10.786000+00:00 Configure a credential helper to remove this warning. See
+
+2026-06-04T04:22:10.786000+00:00 https://docs.docker.com/go/credential-store/
+
+2026-06-04T04:22:10.786000+00:00 
+
+2026-06-04T04:22:10.786000+00:00 Login Succeeded
+
+2026-06-04T04:22:10.786000+00:00 
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:09.763606 Phase complete: PRE_BUILD State: SUCCEEDED
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:09.763622 Phase context status code:  Message: 
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:09.808504 Entering phase BUILD
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:09.810073 Running command echo Building the Docker image...
+
+2026-06-04T04:22:10.786000+00:00 Building the Docker image...
+
+2026-06-04T04:22:10.786000+00:00 
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:09.814880 Running command docker build -t 807462092031.dkr.ecr.us-east-1.amazonaws.com/banking-sdlc:latest .
+
+2026-06-04T04:22:10.786000+00:00 #0 building with "default" instance using docker driver
+
+2026-06-04T04:22:10.786000+00:00 
+
+2026-06-04T04:22:10.786000+00:00 #1 [internal] load build definition from Dockerfile
+
+2026-06-04T04:22:10.786000+00:00 #1 transferring dockerfile: 320B done
+
+2026-06-04T04:22:10.786000+00:00 #1 DONE 0.0s
+
+2026-06-04T04:22:10.786000+00:00 
+
+2026-06-04T04:22:10.786000+00:00 #2 [internal] load metadata for docker.io/library/nginx:stable-alpine
+
+2026-06-04T04:22:10.786000+00:00 #2 ...
+
+2026-06-04T04:22:10.786000+00:00 
+
+2026-06-04T04:22:10.786000+00:00 #3 [internal] load metadata for docker.io/library/node:18-alpine
+
+2026-06-04T04:22:10.786000+00:00 #3 ERROR: failed to copy: httpReadSeeker: failed open: unexpected status from GET request to https://registry-1.docker.io/v2/library/node/manifests/sha256:929b04d7c782f04f615cf785488fed452b6569f87c73ff666ad553a7554f0006: 429 Too Many Requests
+
+2026-06-04T04:22:10.786000+00:00 toomanyrequests: You have reached your unauthenticated pull rate limit. https://www.docker.com/increase-rate-limit
+
+2026-06-04T04:22:10.786000+00:00 
+
+2026-06-04T04:22:10.786000+00:00 #2 [internal] load metadata for docker.io/library/nginx:stable-alpine
+
+2026-06-04T04:22:10.786000+00:00 #2 CANCELED
+
+2026-06-04T04:22:10.786000+00:00 ------
+
+2026-06-04T04:22:10.786000+00:00  > [internal] load metadata for docker.io/library/node:18-alpine:
+
+2026-06-04T04:22:10.786000+00:00 ------
+
+2026-06-04T04:22:10.786000+00:00 Dockerfile:1
+
+2026-06-04T04:22:10.786000+00:00 --------------------
+
+2026-06-04T04:22:10.786000+00:00    1 | >>> FROM node:18-alpine AS build
+
+2026-06-04T04:22:10.786000+00:00    2 |     WORKDIR /app
+
+2026-06-04T04:22:10.786000+00:00    3 |     COPY package*.json ./
+
+2026-06-04T04:22:10.786000+00:00 --------------------
+
+2026-06-04T04:22:10.786000+00:00 ERROR: failed to build: failed to solve: node:18-alpine: failed to resolve source metadata for docker.io/library/node:18-alpine: failed to copy: httpReadSeeker: failed open: unexpected status from GET request to https://registry-1.docker.io/v2/library/node/manifests/sha256:929b04d7c782f04f615cf785488fed452b6569f87c73ff666ad553a7554f0006: 429 Too Many Requests
+
+2026-06-04T04:22:10.786000+00:00 toomanyrequests: You have reached your unauthenticated pull rate limit. https://www.docker.com/increase-rate-limit
+
+2026-06-04T04:22:10.786000+00:00 
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.301084 Command did not exit successfully docker build -t 807462092031.dkr.ecr.us-east-1.amazonaws.com/banking-sdlc:latest . exit status 1
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.305195 Phase complete: BUILD State: FAILED
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.305212 Phase context status code: COMMAND_EXECUTION_ERROR Message: Error while executing command: docker build -t 807462092031.dkr.ecr.us-east-1.amazonaws.com/banking-sdlc:latest .. Reason: exit status 1
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.348128 Entering phase POST_BUILD
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.350168 Phase complete: POST_BUILD State: SUCCEEDED
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.350184 Phase context status code:  Message: 
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.403727 Set report auto-discover timeout to 5 seconds
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.403771 Expanding base directory path:  .
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.405782 Assembling file list
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.405798 Expanding .
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.407791 Expanding file paths for base directory .
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.407803 Assembling file list
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.407807 Expanding **/*
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.608741 Found 5 file(s)
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.608847 Report auto-discover file discovery took 0.205120 seconds
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.609715 Phase complete: UPLOAD_ARTIFACTS State: SUCCEEDED
+
+2026-06-04T04:22:10.786000+00:00 [Container] 2026/06/04 04:22:10.609749 Phase context status code:  Message: 
