@@ -37,7 +37,7 @@ jobs:
         run: |
           IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
           echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_OUTPUT
-          docker build -t $IMAGE_URI .
+          docker build --no-cache --platform linux/amd64 -t $IMAGE_URI .
           docker push $IMAGE_URI
 
       - name: Render ECS task definition
