@@ -2,8 +2,14 @@
   "name": "banking-sdlc",
   "version": "1.0.0",
   "private": true,
+  "overrides": {
+    "ajv": "^8.17.1"
+  },
   "dependencies": {
-    "ajv": "^6.12.6",
+    "@anthropic-ai/sdk": "^0.100.1",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "lucide-react": "^1.17.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -11,6 +17,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:bank": "set \"PORT=3000\" && set \"REACT_APP_MODE=bank\" && react-scripts start",
+    "start:sdlc": "set \"PORT=3001\" && set \"REACT_APP_MODE=sdlc\" && react-scripts start",
+    "start:agent": "node agent/server.mjs",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
