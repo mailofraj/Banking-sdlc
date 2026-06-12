@@ -1,9 +1,7 @@
 {
-  "family": "banking-sdlc-task",
+  "family": "banking-sdlc-cluster",
   "networkMode": "awsvpc",
-  "requiresCompatibilities": [
-    "FARGATE"
-  ],
+  "requiresCompatibilities": ["FARGATE"],
   "cpu": "256",
   "memory": "512",
   "containerDefinitions": [
@@ -17,7 +15,15 @@
           "hostPort": 80,
           "protocol": "tcp"
         }
-      ]
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/banking-sdlc-cluster",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "banking-sdlc"
+        }
+      }
     }
   ]
 }
