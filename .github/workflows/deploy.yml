@@ -36,13 +36,24 @@ jobs:
       - name: Login to ECR
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Set up Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Build Demo Bank
+        run: |
+          npm install --legacy-peer-deps
+          CI=false npm run build
+
       - name: Build and push Demo Bank image
         id: build
         run: |
           set -eo pipefail
           IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.ECR_REPO_BANK }}:${{ github.sha }}
           echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_OUTPUT
-          docker build --no-cache --platform linux/amd64 -t "$IMAGE_URI" .
+          docker build --platform linux/amd64 -t "$IMAGE_URI" .
           docker push "$IMAGE_URI"
 
       - name: Ensure ECR repo exists
@@ -254,13 +265,24 @@ jobs:
           aws ecr describe-repositories --repository-names ${{ env.ECR_REPO_SDLC }} \
             || aws ecr create-repository --repository-name ${{ env.ECR_REPO_SDLC }}
 
+      - name: Set up Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Build SDLC Dashboard
+        run: |
+          npm install --legacy-peer-deps
+          CI=false REACT_APP_MODE=sdlc npm run build
+
       - name: Build and push SDLC Dashboard image
         id: build-sdlc
         run: |
           set -eo pipefail
           IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.ECR_REPO_SDLC }}:${{ github.sha }}
           echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_OUTPUT
-          docker build --no-cache --platform linux/amd64 -f Dockerfile.sdlc -t "$IMAGE_URI" .
+          docker build --platform linux/amd64 -f Dockerfile.sdlc -t "$IMAGE_URI" .
           docker push "$IMAGE_URI"
 
       - name: Provision & deploy SDLC Dashboard ECS service
